@@ -17,37 +17,19 @@
 
 namespace shoghicp\FastTransfer;
 
-use pocketmine\network\protocol\DataPacket;
+use pocketmine\network\protocol\TransferPacket;
 
-class StrangePacket extends DataPacket{
-	const NETWORK_ID = 0x1b;
-
-	public $address;
-	public $port = 19132;
-
+/**
+  * @deprecated Use pocketmine\network\protocol\TransferPacket!
+  */
+class StrangePacket extends TransferPacket{
+	
+	public function __construct(){
+		parent::__construct();
+		$this->port = 19132; //Compatibilty for not needing to set port.
+	}
+	
 	public function pid(){
-		return 0x1b;
+		return self::NETWORK_ID;
 	}
-
-	protected function putAddress($addr, $port, $version = 4){
-		$this->putByte($version);
-		if($version === 4){
-			foreach(explode(".", $addr) as $b){
-				$this->putByte((~((int) $b)) & 0xff);
-			}
-			$this->putShort($port);
-		}else{
-			//IPv6
-		}
-	}
-
-	public function decode(){
-
-	}
-
-	public function encode(){
-		$this->reset();
-		$this->putAddress($this->address, $this->port);
-	}
-
 }

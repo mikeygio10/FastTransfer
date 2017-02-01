@@ -1,7 +1,9 @@
 # FastTransfer
 
+This plugin aims to provide a compatibility layer for old plugins that used to depend on FastTransfer.
+
 Transfer vanilla Minecraft: PE clients to another server.
-Works with Minecraft: PE 0.11.0 alpha build 6 or higher.
+Works with Minecraft: PE 1.0.3 alpha or higher.
 
      FastTransfer plugin for PocketMine-MP
      Copyright (C) 2015 Shoghi Cervantes <https://github.com/shoghicp/FastTransfer>

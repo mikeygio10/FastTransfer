@@ -1,10 +1,10 @@
 name: FastTransfer
-version: 1.0.2
-api: 1.12.0
+version: 1.0.3
+api: 3.0.0-ALPHA3
 main: shoghicp\FastTransfer\FastTransfer
 load: STARTUP
-author: shoghicp
-website: "https://github.com/shoghicp/FastTransfer"
+author: [shoghicp, robske_110]
+website: "https://github.com/robske_110/FastTransfer"
 description: "Transfer vanilla Minecraft: PE clients to another server"
 commands:
  transfer:

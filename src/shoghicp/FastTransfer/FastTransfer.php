@@ -27,8 +27,6 @@ use pocketmine\utils\TextFormat;
 
 class FastTransfer extends PluginBase{
 
-	private $lookup = [];
-
 	/**
 	 * Will transfer a connected player to another server.
 	 * This will trigger PlayerTransferEvent
@@ -49,11 +47,7 @@ class FastTransfer extends PluginBase{
 			return false;
 		}
 
-		$ip = $this->lookupAddress($ev->getAddress());
-
-		if($ip === null){
-			return false;
-		}
+		$ip = $ev->getAddress();
 		
 		if($message !== null and $message !== ""){
 			$player->sendMessage($message);	
@@ -62,16 +56,16 @@ class FastTransfer extends PluginBase{
 		$packet = new StrangePacket();
 		$packet->address = $ip;
 		$packet->port = $ev->getPort();
-		$player->dataPacket($packet->setChannel(Network::CHANNEL_PRIORITY));
+		$player->dataPacket($packet);
 
 		return true;
 	}
 
 	/**
-	 * Clear the DNS lookup cache.
+	 * @deprecated
+	 * Does nothing.
 	 */
 	public function cleanLookupCache(){
-		$this->lookup = [];
 	}
 
 
@@ -109,31 +103,5 @@ class FastTransfer extends PluginBase{
 		}
 
 		return false;
-	}
-
-	/**
-	 * @param $address
-	 *
-	 * @return null|string
-	 */
-	private function lookupAddress($address){
-		//IP address
-		if(preg_match("/^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$/", $address) > 0){
-			return $address;
-		}
-
-		$address = strtolower($address);
-
-		if(isset($this->lookup[$address])){
-			return $this->lookup[$address];
-		}
-
-		$host = gethostbyname($address);
-		if($host === $address){
-			return null;
-		}
-
-		$this->lookup[$address] = $host;
-		return $host;
 	}
 }
