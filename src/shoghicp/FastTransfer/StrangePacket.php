@@ -28,8 +28,4 @@ class StrangePacket extends TransferPacket{
 		parent::__construct();
 		$this->port = 19132; //Compatibilty for not needing to set port.
 	}
-	
-	public function pid(){
-		return self::NETWORK_ID;
-	}
 }
