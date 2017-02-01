@@ -23,9 +23,4 @@ use pocketmine\network\protocol\TransferPacket;
   * @deprecated Use pocketmine\network\protocol\TransferPacket!
   */
 class StrangePacket extends TransferPacket{
-	
-	public function __construct(){
-		parent::__construct();
-		$this->port = 19132; //Compatibilty for not needing to set port.
-	}
 }
