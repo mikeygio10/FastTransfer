@@ -17,7 +17,7 @@
 
 namespace shoghicp\FastTransfer;
 
-use pocketmine\network\protocol\DataPacket;
+use pocketmine\network\mcpe\protocol\DataPacket;
 
 class StrangePacket extends DataPacket{
 	const NETWORK_ID = 0x1b;
