@@ -1,6 +1,6 @@
 name: FastTransfer
 version: 1.0.2
-api: 1.12.0
+api: [3.0.0-ALPHA6, 3.0.1, 3.0.0-ALPHA7]
 main: shoghicp\FastTransfer\FastTransfer
 load: STARTUP
 author: shoghicp
