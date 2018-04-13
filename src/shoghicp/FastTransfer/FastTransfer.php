@@ -19,7 +19,7 @@ namespace shoghicp\FastTransfer;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\event\TranslationContainer;
+use pocketmine\lang\TranslationContainer;
 use pocketmine\network\Network;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
@@ -42,7 +42,7 @@ class FastTransfer extends PluginBase{
 	 *
 	 * @return bool
 	 */
-	public function transferPlayer(Player $player, $address, $port = 19132, $message = "You are being transferred"){
+	public function transferPlayer(Player $player, string $address, int $port = 19132, string $message = "You are being transferred"): bool{
 		$ev = new PlayerTransferEvent($player, $address, $port, $message);
 		$this->getServer()->getPluginManager()->callEvent($ev);
 		if($ev->isCancelled()){
@@ -75,7 +75,7 @@ class FastTransfer extends PluginBase{
 	}
 
 
-	public function onCommand(CommandSender $sender, Command $command, $label, array $args){
+	public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool{
 		if($label === "transfer"){
 			if(count($args) < 2 or count($args) > 3 or (count($args) === 2 and !($sender instanceof Player))){
 				$sender->sendMessage(new TranslationContainer("commands.generic.usage", [$command->getUsage()]));
@@ -101,6 +101,7 @@ class FastTransfer extends PluginBase{
 			}
 
 			$sender->sendMessage("Transferring player " . $target->getDisplayName() . " to $address:$port");
+			$this->getServer()->broadcastMessage("§b " . $target->getDisplayName() . " §ahas been transferred to §c$address:$port");
 			if(!$this->transferPlayer($target, $address, $port)){
 				$sender->sendMessage(TextFormat::RED . "An error occurred during the transfer");
 			}
