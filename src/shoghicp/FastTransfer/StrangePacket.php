@@ -14,9 +14,9 @@
  * GNU General Public License for more details.
  */
 namespace shoghicp\FastTransfer;
-use pocketmine\network\protocol\TransferPacket;
+use pocketmine\network\mcpe\protocol\TransferPacket;
 /**
-  * @deprecated Use pocketmine\network\protocol\TransferPacket!
+  * @deprecated Use pocketmine\network\mcpe\protocol\TransferPacket!
   */
 class StrangePacket extends TransferPacket{
 }
