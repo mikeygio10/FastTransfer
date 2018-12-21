@@ -42,7 +42,7 @@ class FastTransfer extends PluginBase{
 	 */
 	public function transferPlayer(Player $player, string $address, int $port = 19132, string $message = "You are being transferred"): bool{
 		$ev = new PlayerTransferEvent($player, $address, $port, $message);
-		$this->getServer()->getPluginManager()->callEvent($ev);
+		$ev->call();
 		if($ev->isCancelled()){
 			return false;
 		}
@@ -98,8 +98,7 @@ class FastTransfer extends PluginBase{
 				return true;
 			}
 
-			$sender->sendMessage("Transferring player " . $target->getDisplayName() . " to $address:$port");
-			$this->getServer()->broadcastMessage("§b " . $target->getDisplayName() . " §ahas been transferred to §c$address:$port");
+			$sender->sendMessage("Transferring player " . $target->getDisplayName());
 			if(!$this->transferPlayer($target, $address, $port)){
 				$sender->sendMessage(TextFormat::RED . "An error occurred during the transfer");
 			}
